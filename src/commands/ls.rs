@@ -1,4 +1,4 @@
-use crate::structs::command::Command;
+use crate::structs::{command::Command, flag::{Flag, FlagArg}};
 
 pub const LS_CMD : &'static Command = &Command{
     name: "List",
@@ -8,6 +8,6 @@ pub const LS_CMD : &'static Command = &Command{
     func: ls_cmd,
 };
 
-pub fn ls_cmd() {
+pub fn ls_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
 
 }

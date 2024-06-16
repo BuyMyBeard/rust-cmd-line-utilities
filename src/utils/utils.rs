@@ -20,10 +20,43 @@ impl OptionArgType for Option<String> {
         
         if first_char == '-' {
             let flag_arg = &arg[1..arg.len()];
-            let flag = match command.options.iter().find(|x| x.flag == flag_arg) {
+            let flag = match command.options.iter().find(|flag: &&&crate::structs::flag::Flag| flag.flag.to_lowercase() == flag_arg) {
                 Some(flag) => flag,
                 None => terminate_invalid_flag_error(flag_arg, command.name),
             };
         }  
     }
+}
+
+pub trait IsFlag {
+    fn is_flag(&self) -> Option<String>;
+}
+
+/// Returns Some() without the prefix or None if not a flag
+impl IsFlag for Option<String> {
+    fn is_flag(&self) -> Option<String> {
+        let string = match &self {
+            Some(value) => value,
+            None => return None,
+        };
+        let first_char = match string.chars().nth(0) {
+            Some(value) => value,
+            None => return None,
+        };
+        return match first_char {
+            '-' => Some(String::from(&string[1..string.len()])),
+            _ => None,
+        };
+    }
+}
+
+pub fn is_flag(arg: &str) -> bool {
+    let first_char = match arg.trim().chars().nth(0) {
+        Some(value) => value,
+        None => return false,
+    };
+    return match first_char {
+        '-' => true,
+        _ => false,
+    };
 }

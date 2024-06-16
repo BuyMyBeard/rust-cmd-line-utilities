@@ -1,18 +1,29 @@
-use crate::{commands::command_list::COMMANDS, structs::command::Command};
+use std::process::exit;
+
+use crate::{commands::command_list::COMMANDS, structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}};
 
 pub const HELP_CMD : &'static Command = &Command{
     name: "Help",
     explanation: "Display this menu",
     command: "help",
-    options: &[],
+    options: &[
+        EXECUTE,
+    ],
     func: help_cmd,
 };
 
-fn help_cmd() {
+const EXECUTE : &'static Flag = &Flag{
+    name: "Execute",
+    explanation: "Executes something",
+    flag: "-x",
+    arg_type: FlagArgumentType::Int,
+};
 
+fn help_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
+    println!("great success!");
 }
 
-pub fn print_help_menu() {
+pub fn print_help_menu() -> ! {
     let mut t = term::stdout().unwrap();
     const TAB_SPACE: u8 = 10;
     const HELP_MENU_HEADER: &str = "For more information on a command, type 'help {command-name}'";
@@ -27,4 +38,7 @@ pub fn print_help_menu() {
         let _ = t.reset();
         let _ = writeln!(t, "{}", remaining + cmd.explanation);
     }
+    let _ = t.reset();
+    let _ = t.flush();
+    exit(0);
 }

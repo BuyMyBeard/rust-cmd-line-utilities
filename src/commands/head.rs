@@ -1,4 +1,4 @@
-use crate::structs::command::Command;
+use crate::structs::{command::Command, flag::{Flag, FlagArg}};
 
 pub const HEAD_CMD : &'static Command = &Command{
     name: "Head",
@@ -8,6 +8,6 @@ pub const HEAD_CMD : &'static Command = &Command{
     func: head_cmd,
 };
 
-pub fn head_cmd() {
+pub fn head_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
 
 }

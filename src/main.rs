@@ -1,5 +1,5 @@
 use commands::help::print_help_menu;
-use parser::parser::parse_command;
+use parser::parser::{parse_args, parse_command};
 
 extern crate term;
 
@@ -9,7 +9,7 @@ mod utils;
 mod parser;
 
 fn main() {
-    print!("{}", "I like apples");
     let command = parse_command();
-    print!("{}", command.name);
+    let (options, arguments) = parse_args(command);
+    (command.func)(&options, &arguments);
 }

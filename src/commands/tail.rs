@@ -1,4 +1,4 @@
-use crate::structs::command::Command;
+use crate::structs::{command::Command, flag::{Flag, FlagArg}};
 
 pub const TAIL_CMD : &'static Command = &Command{
     name: "Tail",
@@ -8,6 +8,6 @@ pub const TAIL_CMD : &'static Command = &Command{
     func: tail_cmd,
 };
 
-pub fn tail_cmd() {
+pub fn tail_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
 
 }

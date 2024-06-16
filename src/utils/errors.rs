@@ -4,8 +4,8 @@ use term::Terminal;
 
 pub fn terminate_invalid_flag_error(flag: &str, cmd_name: &str) -> ! {
     let mut t = get_error_term();
-    if writeln!(t, "{} : No flag found of type '{}'.", cmd_name, flag).is_err() {
-        println!("{} : No flag found of type '{}'.", cmd_name, flag);
+    if writeln!(t, "{} : No existing flag of type '{}'.", cmd_name, flag).is_err() {
+        println!("{} : No existing flag of type '{}'.", cmd_name, flag);
     }
     cleanup_and_exit(t);
 }
