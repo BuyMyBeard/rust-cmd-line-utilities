@@ -27,6 +27,7 @@ pub fn parse_args(command : &Command) -> (Vec::<(&'static Flag, FlagArg)>, Vec::
         if is_flag(&arg) {
             let next_arg = args_iterator.peek().cloned();
             options.push(parse_flag(String::from(arg.trim()), next_arg, command));
+            // FIXME: conditionally advance iterator if flag argument is not None
             args_iterator.next();
             continue;
         }
