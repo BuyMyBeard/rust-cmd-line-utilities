@@ -1,6 +1,9 @@
+use super::flag::Flag;
+
 pub struct Command {
-    pub cmd_arg: &'static str,
+    pub name: &'static str,
+    pub command: &'static str,
     pub explanation: &'static str,
-    pub options: &'static [&'static str],
+    pub options: &'static [&'static Flag],
     pub func: fn(),
 }

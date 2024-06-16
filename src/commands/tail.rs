@@ -1,7 +1,8 @@
 use crate::structs::command::Command;
 
 pub const TAIL_CMD : &'static Command = &Command{
-    cmd_arg: "tail",
+    name: "Tail",
+    command: "tail",
     explanation: "Print a file's last ten lines",
     options: &[],
     func: tail_cmd,

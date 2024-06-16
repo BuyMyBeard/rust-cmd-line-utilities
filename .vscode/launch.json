@@ -20,12 +20,8 @@
                 }
             },
             "args": [
-                "-f",
+                "help",
                 "arg1",
-                "-e",
-                "arg2",
-                "-g",
-                "arg3"
             ],
             "cwd": "${workspaceFolder}"
         },
