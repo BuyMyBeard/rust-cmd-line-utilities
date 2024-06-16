@@ -9,5 +9,5 @@ pub const TAIL_CMD : &'static Command = &Command{
 };
 
 pub fn tail_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
-
+    todo!();
 }

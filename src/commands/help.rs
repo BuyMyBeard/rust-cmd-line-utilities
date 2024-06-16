@@ -20,7 +20,7 @@ const EXECUTE : &'static Flag = &Flag{
 };
 
 fn help_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
-    println!("great success!");
+    todo!();
 }
 
 pub fn print_help_menu() -> ! {

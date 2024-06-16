@@ -9,5 +9,5 @@ pub const HEAD_CMD : &'static Command = &Command{
 };
 
 pub fn head_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
-
+    todo!();
 }

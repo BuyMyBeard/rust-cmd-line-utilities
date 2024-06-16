@@ -14,6 +14,7 @@ pub enum FlagArgumentType {
     OptionalInt,
 }
 
+#[derive(PartialEq)]
 pub enum FlagArg {
     Int(i32),
     String(String),

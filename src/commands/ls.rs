@@ -9,5 +9,5 @@ pub const LS_CMD : &'static Command = &Command{
 };
 
 pub fn ls_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
-
+    todo!();
 }
