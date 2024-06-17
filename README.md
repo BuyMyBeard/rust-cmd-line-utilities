@@ -14,8 +14,10 @@ Display the help menu.
 ### ls (Not implemented yet)
 Display the files and folders in the provided directory.
 
-### head (Not implemented yet)
+### head
 Display the first 10 lines of a file.
+
+-n {num}: Prints the first 'num' lines instead of first 10 lines. num is mandatory to be specified in command otherwise it displays an error.
 
 ### tail (Not implemented yet)
 Display the last 10 lines of a file.
