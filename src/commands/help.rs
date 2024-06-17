@@ -16,7 +16,7 @@ const EXECUTE : &'static Flag = &Flag{
     name: "Execute",
     explanation: "Executes something",
     flag: "-x",
-    arg_type: FlagArgumentType::Int,
+    arg_type: FlagArgumentType::UnsignedInt,
 };
 
 fn help_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {

@@ -8,15 +8,15 @@ pub struct Flag {
 
 pub enum FlagArgumentType {
     None,
-    Int,
+    UnsignedInt,
     String,
     OptionalString,
-    OptionalInt,
+    OptionalUInt,
 }
 
 #[derive(PartialEq)]
 pub enum FlagArg {
-    Int(i32),
+    UnsignedInt(u32),
     String(String),
     None,
 }

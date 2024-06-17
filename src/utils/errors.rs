@@ -1,4 +1,4 @@
-use std::{io::Stdout, process::exit};
+use std::{io::{Error, Stdout}, process::exit};
 
 use term::Terminal;
 
@@ -26,10 +26,26 @@ pub fn terminate_incorrect_format_error(cmd_name: &str, arg: &str, expected_type
     cleanup_and_exit(t);
 }
 
-pub fn terminate_missing_argument_error(cmd_name: &str, flag_name: &str, expected_type: &str) -> ! {
+pub fn terminate_missing_flag_argument_error(cmd_name: &str, flag_name: &str, expected_type: &str) -> ! {
     let mut t = get_error_term();
     if writeln!(t, "{} : Missing an argument for parameter '{}'. Specify a parameter of type '{}' and try again.", cmd_name, flag_name, expected_type).is_err() {
         println!("{} : Missing an argument for parameter '{}'. Specify a parameter of type '{}' and try again.", cmd_name, flag_name, expected_type);
+    }
+    cleanup_and_exit(t);
+}
+
+pub fn terminate_missing_argument_error(cmd_name: &str) -> ! {
+    let mut t = get_error_term();
+    if writeln!(t, "{} : Missing an argument for command {}.", cmd_name, cmd_name).is_err() {
+        println!("{} : Missing an argument for command {}.", cmd_name, cmd_name);
+    }
+    cleanup_and_exit(t);
+}
+
+pub fn terminate_cannot_open_file(cmd_name: &str, path: &str, error: Error) -> ! {
+    let mut t = get_error_term();
+    if writeln!(t, "{} : Cannot open file at specified path '{}'.\n{}", cmd_name, path, error).is_err() {
+        println!("{} : Missing an argument for command {}.", cmd_name, cmd_name);
     }
     cleanup_and_exit(t);
 }

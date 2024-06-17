@@ -1,6 +1,6 @@
 use std::any::type_name;
 
-use crate::{commands::{command_list::COMMANDS, help::print_help_menu}, structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}, utils::{errors::{terminate_incorrect_format_error, terminate_invalid_flag_error, terminate_missing_argument_error, terminate_unknown_cmd_error}, utils::is_flag}};
+use crate::{commands::{command_list::COMMANDS, help::print_help_menu}, structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}, utils::{errors::{terminate_incorrect_format_error, terminate_invalid_flag_error, terminate_missing_flag_argument_error, terminate_unknown_cmd_error}, utils::is_flag}};
 
 pub fn parse_command() -> &'static Command {
     let cmd_name = String::from(match std::env::args().nth(1) {
@@ -38,41 +38,40 @@ pub fn parse_args(command : &Command) -> (Vec::<(&'static Flag, FlagArg)>, Vec::
     return (options, arguments);
 }
 
-fn parse_flag(flag_arg: String, next_arg : Option<String>, command : &Command) -> (&'static Flag, FlagArg) {
-    
+fn parse_flag(flag_arg: String, next_arg : Option<String>, command : &Command) -> (&'static Flag, FlagArg) { 
     let flag = match command.options.iter().find(|x| x.flag == flag_arg) {
         Some(flag) => flag,
         None => terminate_invalid_flag_error(&flag_arg, command.name),
     };
     match flag.arg_type {
         FlagArgumentType::None => return (flag, FlagArg::None),
-        FlagArgumentType::Int => {
+        FlagArgumentType::UnsignedInt => {
             let arg = String::from(match next_arg {
-                None => terminate_missing_argument_error(
+                None => terminate_missing_flag_argument_error(
                     command.name, 
                     flag.name, 
-                    type_name::<i32>()
+                    type_name::<u32>()
                 ),
                 Some(value) => value,
             }.trim());
-            return match arg.parse::<i32>() {
-                Ok(n) => (flag, FlagArg::Int(n)),
-                Err(_) => terminate_incorrect_format_error(command.name, &arg, type_name::<i32>()),
+            return match arg.parse::<u32>() {
+                Ok(n) => (flag, FlagArg::UnsignedInt(n)),
+                Err(_) => terminate_incorrect_format_error(command.name, &arg, type_name::<u32>()),
             };
         },
-        FlagArgumentType::OptionalInt => {
+        FlagArgumentType::OptionalUInt => {
             let arg = String::from(match next_arg {
                 None => return (flag, FlagArg::None),
                 Some(value) => value,
             }.trim());
-            return match arg.parse::<i32>() {
-                Ok(n) => (flag, FlagArg::Int(n)),
-                Err(_) => terminate_incorrect_format_error(command.name, &arg, type_name::<i32>()),
+            return match arg.parse::<u32>() {
+                Ok(n) => (flag, FlagArg::UnsignedInt(n)),
+                Err(_) => terminate_incorrect_format_error(command.name, &arg, type_name::<u32>()),
             };
         },
         FlagArgumentType::String => {
             return match next_arg {
-                None => terminate_missing_argument_error(
+                None => terminate_missing_flag_argument_error(
                     command.name, 
                     flag.name, 
                     type_name::<String>()
