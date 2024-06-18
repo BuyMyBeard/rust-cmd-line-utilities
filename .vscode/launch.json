@@ -20,10 +20,8 @@
                 }
             },
             "args": [
-                "head",
+                "help",
                 "W:/Fun/rust-cmd-line-utilities/Readme.md",
-                "-n",
-                "5"
             ],
             "cwd": "${workspaceFolder}"
         },

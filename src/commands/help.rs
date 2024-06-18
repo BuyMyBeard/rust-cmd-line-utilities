@@ -12,15 +12,9 @@ pub const HELP_CMD : &'static Command = &Command{
     func: help_cmd,
 };
 
-const EXECUTE : &'static Flag = &Flag{
-    name: "Execute",
-    explanation: "Executes something",
-    flag: "-x",
-    arg_type: FlagArgumentType::UnsignedInt,
-};
-
-fn help_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
-    todo!();
+fn help_cmd(_ : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
+    print_help_menu();
+    
 }
 
 pub fn print_help_menu() -> ! {
