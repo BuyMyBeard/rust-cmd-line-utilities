@@ -1,6 +1,8 @@
 use std::{fs::File, io::{BufRead, BufReader}, path::Path};
 
-use crate::{structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}, utils::{errors::{terminate_cannot_open_file, terminate_missing_argument_error}, utils::{flag_u32_arg_or_default, flag_u32_arg_or_none}}};
+use crate::{structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}, utils::{errors::{terminate_cannot_open_file, terminate_missing_argument_error}, utils::{flag_u32_arg_or_default, flag_u32_arg_or_none, has_flag}}};
+
+use super::shared_flags::VERBOSE;
 
 pub const HEAD_CMD : &'static Command = &Command{
     name: "Head",
@@ -9,6 +11,7 @@ pub const HEAD_CMD : &'static Command = &Command{
     options: &[
         LINES,
         BYTES,
+        VERBOSE,
     ],
     func: head_cmd,
 };
@@ -43,13 +46,14 @@ pub fn head_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<St
 
     let mut t = term::stdout().unwrap();
 
-    const UNDISPLAYABLE: &'static str = "Undisplayable file name";
-    let file_name = match path.file_name() {
-        Some(name) => name.to_str().unwrap_or(UNDISPLAYABLE),
-        None => UNDISPLAYABLE,
-    };
-
-    _ = writeln!(t, "==> {} <==", file_name);
+    if has_flag(options, VERBOSE) {
+        const UNDISPLAYABLE: &'static str = "Undisplayable file name";
+        let file_name = match path.file_name() {
+            Some(name) => name.to_str().unwrap_or(UNDISPLAYABLE),
+            None => UNDISPLAYABLE,
+        };
+        _ = writeln!(t, "==> {} <==", file_name);
+    } 
 
     let mut total_bytes_read: u32 = 0;
 
