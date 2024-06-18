@@ -10,10 +10,10 @@ pub fn terminate_invalid_flag_error(flag: &str, cmd_name: &str) -> ! {
     cleanup_and_exit(t);
 }
 
-pub fn terminate_unknown_cmd_error(cmd_name: &str) -> ! {
+pub fn terminate_unknown_cmd_error(cmd_name: &str, arg: &str) -> ! {
     let mut t = get_error_term();
-    if writeln!(t, "{} : The term '{}' is not a recognized command.", cmd_name, cmd_name).is_err() {
-        println!("{} : The term '{}' is not a recognized command.", cmd_name, cmd_name);
+    if writeln!(t, "{} : The term '{}' is not a recognized command.", cmd_name, arg).is_err() {
+        println!("{} : The term '{}' is not a recognized command.", cmd_name, arg);
     }
     cleanup_and_exit(t);
 }
@@ -45,7 +45,15 @@ pub fn terminate_missing_argument_error(cmd_name: &str) -> ! {
 pub fn terminate_cannot_open_file(cmd_name: &str, path: &str, error: Error) -> ! {
     let mut t = get_error_term();
     if writeln!(t, "{} : Cannot open file at specified path '{}'.\n{}", cmd_name, path, error).is_err() {
-        println!("{} : Missing an argument for command {}.", cmd_name, cmd_name);
+        println!("{} : Cannot open file at specified path '{}'.\n{}", cmd_name, path, error);
+    }
+    cleanup_and_exit(t);
+}
+
+pub fn terminate_too_many_arguments(cmd_name: &str, invalid_argument: &str) -> ! {
+    let mut t = get_error_term();
+    if writeln!(t, "{} : A positional argument cannot be found that accepts argument '{}'.", cmd_name, invalid_argument).is_err() {
+        println!("{} : A positional argument cannot be found that accepts argument '{}'.", cmd_name, invalid_argument);
     }
     cleanup_and_exit(t);
 }

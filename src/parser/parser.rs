@@ -12,7 +12,7 @@ pub fn parse_command() -> &'static Command {
     
     return match COMMANDS.iter().find(|command| command.command == cmd_name) {
         Some(cmd) => cmd,
-        None => terminate_unknown_cmd_error(&cmd_name),
+        None => terminate_unknown_cmd_error(&cmd_name, &cmd_name),
     };
 }
 
