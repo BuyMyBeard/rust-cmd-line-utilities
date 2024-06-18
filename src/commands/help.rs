@@ -6,15 +6,12 @@ pub const HELP_CMD : &'static Command = &Command{
     name: "Help",
     explanation: "Display this menu",
     command: "help",
-    options: &[
-        EXECUTE,
-    ],
+    options: &[],
     func: help_cmd,
 };
 
 fn help_cmd(_ : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
-    print_help_menu();
-    
+    print_help_menu()
 }
 
 pub fn print_help_menu() -> ! {
