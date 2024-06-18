@@ -8,16 +8,23 @@ Also supports extendable error handling for invalid arguments.
 ## Supported commands
 This is still a work in progress.
 
-### help
+### help [command]
 Display the help menu.
+If 'command' is provided, displays specific help for this command and the different flags for it.
 
-### ls (Not implemented yet)
+### ls {path} (Not implemented yet)
 Display the files and folders in the provided directory.
 
-### head
+### head {path}
 Display the first 10 lines of a file.
 
 -n {num}: Prints the first 'num' lines instead of first 10 lines. num is mandatory to be specified in command otherwise it displays an error.
+-c {num}: Prints the up to 'num' bytes.
+- v : Preceeds the file content by the file name.
 
 ### tail (Not implemented yet)
 Display the last 10 lines of a file.
+
+-n {num}: Prints the last 'num' lines instead of last 10 lines. num is mandatory to be specified in command otherwise it displays an error.
+-c {num}: Prints the up to 'num' bytes.
+- v : Preceeds the file content by the file name.
