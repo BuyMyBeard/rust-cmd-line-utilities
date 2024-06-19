@@ -1,3 +1,5 @@
+use std::net::IpAddr;
+
 
 pub struct Flag {
     pub name : &'static str,
@@ -6,9 +8,11 @@ pub struct Flag {
     pub arg_type: FlagArgumentType,
 }
 
+#[derive(PartialEq)]
 pub enum FlagArgumentType {
     None,
     UnsignedInt,
+    IpAddress,
     String,
     OptionalString,
     OptionalUInt,
@@ -18,5 +22,6 @@ pub enum FlagArgumentType {
 pub enum FlagArg {
     UnsignedInt(u32),
     String(String),
+    IpAddress(IpAddr),
     None,
 }

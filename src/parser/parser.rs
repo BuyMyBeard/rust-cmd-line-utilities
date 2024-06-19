@@ -1,6 +1,6 @@
-use std::any::type_name;
+use std::{any::type_name, net::{IpAddr, Ipv4Addr}};
 
-use crate::{commands::{command_list::COMMANDS, help::print_help_menu}, structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}, utils::{errors::{terminate_incorrect_format_error, terminate_invalid_flag_error, terminate_missing_flag_argument_error, terminate_unknown_cmd_error}, utils::is_flag}};
+use crate::{commands::{command_list::COMMANDS, help::print_help_menu}, structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}, utils::{errors::{terminate_incorrect_format_error, terminate_invalid_flag_error, terminate_missing_flag_argument_error, terminate_unknown_cmd_error}, utils::{is_flag, try_parse_string_to_ip}}};
 
 pub fn parse_command() -> &'static Command {
     let cmd_name = String::from(match std::env::args().nth(1) {
@@ -85,5 +85,19 @@ fn parse_flag(flag_arg: String, next_arg : Option<String>, command : &Command) -
                 Some(value) => (flag, FlagArg::String(String::from(value.trim()))),
             };
         },
+        FlagArgumentType::IpAddress => {
+            let arg = String::from(match next_arg {
+                None => terminate_missing_flag_argument_error(
+                    command.name,
+                    flag.name, 
+                    type_name::<IpAddr>()
+                ),
+                Some(value) => value,
+            }.trim());
+            match try_parse_string_to_ip(&arg) {
+                Some(ip) => return (flag, FlagArg::IpAddress(ip)),
+                None => terminate_incorrect_format_error(command.name, &arg, type_name::<IpAddr>())
+            };
+        }
     }
 }

@@ -1,4 +1,3 @@
-use commands::help::print_help_menu;
 use parser::parser::{parse_args, parse_command};
 
 extern crate term;

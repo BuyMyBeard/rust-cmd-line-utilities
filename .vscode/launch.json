@@ -20,10 +20,8 @@
                 }
             },
             "args": [
-                "head",
-                "-n",
-                "5",
-                "W:/Fun/rust-cmd-line-utilities/Readme.md"
+                "ping",
+                "2001:0:0eab:dead::a0:abcd:4e",
             ],
             "cwd": "${workspaceFolder}"
         },
