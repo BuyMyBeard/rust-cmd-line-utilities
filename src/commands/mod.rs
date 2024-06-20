@@ -5,3 +5,5 @@ pub mod command_list;
 pub mod help;
 pub mod shared_flags;
 pub mod ping;
+pub mod hostname;
+pub mod echo;

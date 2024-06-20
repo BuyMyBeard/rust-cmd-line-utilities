@@ -4,5 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-ping = "0.5.2"
+gethostname = "0.4.3"
 term = "0.7.0"
+winping = "0.10.1"

@@ -58,7 +58,7 @@ pub fn terminate_too_many_arguments(cmd_name: &str, invalid_argument: &str) -> !
     cleanup_and_exit(t);
 }
 
-pub fn terminate_ping_error(cmd_name: &str, error : ping::Error) -> ! {
+pub fn terminate_ping_error(cmd_name: &str, error : winping::Error) -> ! {
     let mut t = get_error_term();
     if writeln!(t, "{} : {}", cmd_name, error).is_err() {
         println!("{} : {}", cmd_name, error);

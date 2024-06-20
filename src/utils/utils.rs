@@ -1,4 +1,4 @@
-use std::{net::{IpAddr, Ipv4Addr, Ipv6Addr}, num::ParseIntError};
+use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 
 use crate::structs::flag::{Flag, FlagArg};
 
