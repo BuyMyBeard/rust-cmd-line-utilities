@@ -20,7 +20,7 @@
                 }
             },
             "args": [
-                "hostname",
+                "help",
             ],
             "cwd": "${workspaceFolder}"
         },

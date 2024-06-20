@@ -6,7 +6,7 @@ use crate::{structs::{command::Command, flag::{Flag, FlagArg}}, utils::{errors::
 
 pub const PING_CMD : &'static Command = &Command{
     name: "Ping",
-    explanation: "Ping the server at the provided ip address. Works for ipv4 and ipv6qwe5e3w2q",
+    explanation: "Ping the server at the provided ip address. Works for ipv4 and ipv6",
     command: "ping",
     options: &[],
     func: ping_cmd,

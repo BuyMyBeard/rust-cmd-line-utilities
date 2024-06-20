@@ -28,3 +28,12 @@ Display the last 10 lines of a file.
 -n {num}: Prints the last 'num' lines instead of last 10 lines. num is mandatory to be specified in command otherwise it displays an error.
 -c {num}: Prints the up to 'num' bytes.
 - v : Preceeds the file content by the file name.
+
+### ping {ipAddr}
+Ping the server at the provided ip address. Works for ipv4 and ipv6.
+
+### hostname
+Print the current host name.
+
+### echo [...args]
+Print a message as a standard output.
