@@ -1,6 +1,4 @@
-use std::{fs::File, io::{BufRead, BufReader, Seek, SeekFrom}, path::Path};
-
-use crate::{structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}}, utils::{errors::{terminate_cannot_open_file, terminate_missing_argument_error}, utils::{flag_u32_arg_or_default, flag_u32_arg_or_none, has_flag}}};
+use crate::structs::{command::Command, flag::{Flag, FlagArg, FlagArgumentType}};
 
 use super::shared_flags::VERBOSE;
 
@@ -30,7 +28,7 @@ const BYTES : &'static Flag = &Flag{
     arg_type: FlagArgumentType::UnsignedInt,
 };
 
-pub fn tail_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
+pub fn tail_cmd(_ : &Vec::<(&'static Flag, FlagArg)>, _: &Vec::<String>) {
     todo!();
     // let path = Path::new(match arguments.get(0) {
     //     None => terminate_missing_argument_error(TAIL_CMD.name),

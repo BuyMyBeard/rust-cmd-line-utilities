@@ -2,7 +2,7 @@ use std::{any::type_name, net::IpAddr};
 
 use winping::{Buffer, Pinger};
 
-use crate::{structs::{command::Command, flag::{Flag, FlagArg}}, utils::{errors::{terminate_custom_error, terminate_incorrect_format_error, terminate_missing_argument_error, terminate_too_many_arguments, terminate_ping_error}, utils::try_parse_string_to_ip}};
+use crate::{structs::{command::Command, flag::{Flag, FlagArg}}, utils::{errors::{terminate_incorrect_format_error, terminate_missing_argument_error, terminate_too_many_arguments, terminate_ping_error}, utils::try_parse_string_to_ip}};
 
 pub const PING_CMD : &'static Command = &Command{
     name: "Ping",
@@ -37,5 +37,5 @@ fn ping_cmd(_ : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
             }
         }
     }
-    t.flush();
+    _ = t.flush();
 }

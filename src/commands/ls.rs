@@ -8,6 +8,6 @@ pub const LS_CMD : &'static Command = &Command{
     func: ls_cmd,
 };
 
-pub fn ls_cmd(options : &Vec::<(&'static Flag, FlagArg)>, arguments: &Vec::<String>) {
+pub fn ls_cmd(_ : &Vec::<(&'static Flag, FlagArg)>, _: &Vec::<String>) {
     todo!();
 }
